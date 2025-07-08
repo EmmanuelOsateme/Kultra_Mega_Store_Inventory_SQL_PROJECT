@@ -1,7 +1,7 @@
-# Kultra_Mega_Store_Inventory_SQL_PROJECT
+# KMS_SQL_PROJECT
 Analysed datasets to give key insight and recommendations
 
-# PROJECT TOPIC: Amazon Product Review Analysis
+# PROJECT TOPIC: Kultra Mega Store Inventory
 
 ## Project Overview
 This is my project work after my 3 month training as a DSA student in Incubator hub. The project describes Kultra Mega Store Inventories, comprising of products, Customer names, Customer Segment, Total Sales, Shipping method, Orders and their date, returnd items, profits incurred, amongst others. The raw data file was 8,400 rows with row id and order id to identify and track each products.
