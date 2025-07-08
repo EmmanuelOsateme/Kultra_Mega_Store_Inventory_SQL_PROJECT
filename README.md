@@ -11,7 +11,7 @@ The data for this project is a csv file which was supplied by Incubator Hub and 
 
 ## Tools Used 
 - **SQL server** *[download here](https://youtu.be/dPs7BQ4Zx_Q?si=f9B1NBnHCFmzgoPP)*
-- 
+  
 ### Data Cleaning and Preparation
 In the initial phase of the data cleaning and preparation, we performed the following actions;
 1. **Data loading**
