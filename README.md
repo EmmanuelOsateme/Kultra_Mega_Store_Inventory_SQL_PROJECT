@@ -174,11 +174,12 @@ from the analysis the following were observed.
 
 - KMS did not appropriately spend shipping costs based on the order of  priority. They overused delivery trucks, which are best for bulk or non-urgent orders and underused express air, which is meant for urgent deliveries. This shows a misalignment between shipping cost,speed and order priority leading to inefficient spending and wasted cost.
 
-- To boost sales from the bottom 10 customers,
-  i. The company should focus on strengthening relationships through customized promotions, puchasing behaviours.
-  ii. Reaching out directly through calls or emails to their customers to understand their past experience.
-  iii. Give discounts on their most viewed or previously purchased products, Upsell and Cross-sell Offers,
-  iv. Offer faster delivery, better after-sales support, or dedicated account managers for small businesses
-  v. Organise a survey to understand the needs of the customers, which would make them come again and why they havent been coming frequently
+- To boost sales from the bottom 10 customers;
+   - The company should focus on strengthening relationships through customized promotions, puchasing behaviours.
+   - Reaching out directly through calls or emails to their customers to understand their past experience.
+   - Give discounts on their most viewed or previously purchased products.
+   - Upsell and Cross-sell Offers.
+   - Offer faster delivery, better after-sales support, or dedicated account managers for small businesses.
+   - Organise a survey to understand the needs of the customers, which would make them come again and why they havent been coming frequently
 
 Find below the back up file link for the sql query.
