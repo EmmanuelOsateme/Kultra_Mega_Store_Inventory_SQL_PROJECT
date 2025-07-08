@@ -9,61 +9,176 @@ This is my project work after my 3 month training as a DSA student in Incubator 
 ## Project Source
 The data for this project is a csv file which was supplied by Incubator Hub and is soleley for the training.  
 
-### Tools Used
-- **Microsoft Excel** *[download here](https://Microsoft.com)*
-  - For Data collection
-  - For Data cleaning
-  - For creating calculated columns
-  - For creating a pivot table
-  - for creating a dashboard
-       
+## Tools Used 
+- **SQL server** *[download here](https://youtu.be/dPs7BQ4Zx_Q?si=f9B1NBnHCFmzgoPP)*
+- 
 ### Data Cleaning and Preparation
 In the initial phase of the data cleaning and preparation, we performed the following actions;
-1. **Data loading and Inspection**
-2. **Handling missing variables**
-3. **Data cleaning and formatting**
+1. **Data loading**
+2. **Data cleaning and formatting**
+3. **Allowed nulls and insert primary keys**
 
 ### Exploratory Data Analysis
-EDA which involves the exploring of the data was used to answer questions such as:
-- What is the average Discount percentage by Product category?
-- How many products are listed under each category?
-- What is the total number of reviews per category?
-- Which product has the highest average ratings?
-- What is the average actual price versus the discounted price by category?
-- Which product has the highest number of reviews?
-- How many products have a discount of 50% or more? 
-- What is the distribution of product ratings? 
-- What is the total potential revenue by category? 
-- What is the number of unique products per price range bucket (e.g., <₹200, ₹200–₹500, >₹500)?
-- How does the rating relate to the level of discount? 
-- How many products have fewer than 1,000 reviews? 
-- Which categories have products with the highest discounts? 
-- Identify the top 5 products in terms of rating and number of reviews combined.
+The datasets was used to answer the following questions:
+1. Which product category had the highest sales? 
+2. What are the Top 3 and Bottom 3 regions in terms of sales? 
+3. What were the total sales of appliances in Ontario? 
+4. Advise the management of KMS on what to do to increase the revenue from the bottom 10 customers 
+5. KMS incurred the most shipping cost using which shipping method?
+6. Who are the most valuable customers, and what products or services do they typically purchase? 
+7. Which small business customer had the highest sales? 
+8. Which Corporate Customer placed the most number of orders in 2009 – 2012? 
+9. Which consumer customer was the most profitable one? 
+10. Which customer returned items, and what segment do they belong to? 
+11. If the delivery truck is the most economical but the slowest shipping method and Express Air is the fastest but the most expensive one, do you think the company appropriately spent shipping costs based on the Order Priority? Explain your answer   
+   
+### Data Analysis
+Here are my lines of code and queries used during the analysis.
 
+TO CREATE A NEW DATABASE
+``` SQL 
+create database DSA_project
+```
+CHANGE OF DATA TYPES FOR ALL PRICE(S) COLUMN
+``` SQL
+ALTER table [dbo].[KMS Sql Case Study]
+ALTER COLUMN SALES DECIMAL (10, 3)
+```
+``` SQL
+ALTER table [dbo].[KMS Sql Case Study]
+ALTER COLUMN PROFIT DECIMAL (10, 3)
+```
+``` SQL
+ALTER table [dbo].[KMS Sql Case Study]
+ALTER COLUMN DISCOUNT DECIMAL (10, 3)
+```
+``` SQL
+ALTER table [dbo].[KMS Sql Case Study]
+ALTER COLUMN UNIT_PRICE DECIMAL (10, 3)
+```
+``` SQL
+ALTER table [dbo].[KMS Sql Case Study]
+ALTER COLUMN SHIPPING_COST DECIMAL (10, 3)
+```
+``` SQL
+ALTER table [dbo].[KMS Sql Case Study]
+ALTER COLUMN PRODUCT_BASE_MARGIN DECIMAL (10, 3)
+```
+TO VIEW THE TABLES RESULT 
+``` SQL
+select * from [dbo].[KMS Sql Case Study]
+```
+--------Question 1------
+--- Which product category that has the highest?
+``` SQL
+select top 1 [Product_Category],count ([Product_Category])as [Product Count]
+from [KMS Sql Case Study]
+group by Product_Category
+order by [Product Count] desc
+```
+-------Question 2-------
+--- what are the top 3 and buttom 3 region in terms of sales? 
+``` SQL
+select top 3 [Region],sum([sales]) as [Total Sales]
+from [KMS Sql Case Study]
+group by Region
+order by [Total Sales] desc
+```
+``` SQL
+select top 3 [Region],sum([sales]) as [Total Sales]
+from [KMS Sql Case Study]
+group by Region
+order by [Total Sales] asc
+```
+----------Question 3-------
+----- what were  the Total Sales of applicants in ontario?
+``` SQL
+select Region, SUM(sales) as [Total Sales]
+from [KMS Sql Case Study]
+where Region='ontario'
+Group by Region
+```
+------Question 4-----
+-----Advice the management of KMS on what to do to increase the revenue from the buttom 10 customer 
+``` SQL
+Select top 10 [Customer_Name], SUM([Sales]) as [Total Sales]
+from [KMS Sql Case Study]
+group by Customer_Name
+order by [Total Sales] asc
+```
+--------Question 5------
+------KMS incurred the Most shipping cost using which shipping method ?
+``` SQL
+Select Top 1 [Ship_Mode], SUM([Shipping_Cost]) as [Total Shipping Cost]
+from [KMS Sql Case Study]
+group by Ship_Mode
+order by [Total Shipping Cost] desc
+```
+---------Question 6------
+----Who are the most valuable customer, and what products or services did they typically purchase?
+``` SQL
+select [Customer_Name],Product_Name, SUM(sales) as [Total Sales]
+from [KMS Sql Case Study]
+Group by Customer_Name,Product_Name
+order by [Total Sales] desc
+```
+------Question 7--------
+-----Which small business customer have the highest sales ?
+``` SQL
+select top 1 Customer_Name,Customer_Segment, SUM([Sales]) as [Total Sales]
+from [KMS Sql Case Study]
+where Customer_Segment ='small Business'
+group by Customer_Name,Customer_Segment
+order by [Total Sales] desc
+```
+-----Question 8-------
+---Which corporate customer placed the most number of orders in 2019 -2012?
+``` SQL
+select top 1  Customer_Name,Customer_Segment, count([Order_ID]) as [Total order]
+from [KMS Sql Case Study]
+where Customer_Segment ='corporate' and Order_Date between '2009' and '2012'
+group by Customer_Name,Customer_Segment
+order by [Total order] desc
+```
+-------Question 9------
+---Which consumer customer was the most profitable one?
+``` SQL
+select top 1 Customer_Name,Customer_Segment, sum([Profit]) as [Total profit]
+from [KMS Sql Case Study]
+where Customer_Segment ='Consumer'
+group by Customer_Name,Customer_Segment
+order by [Total profit] desc
+```
+-----Question 10-------
+----Which customer returned items, and what segments do they belong to?
+``` SQL
+select Customer_Name,Customer_Segment,[Status]
+from [KMS Sql Case Study]
+join [dbo].[Order_Status]
+on [KMS Sql Case Study].Order_ID = [dbo].[Order_Status].[Order_ID]
+```
+-----Question 11---------
+If the delivery truck is the most economical but the lowest shipping method and express air is the fastest.
+but the most expensive one, did you think the company appropriately spent shipping costs based on the order priority
+``` SQL
+Select Order_Priority, Ship_Mode,
+    COUNT([Order_ID]) AS [order count],
+    SUM(sales - profit) AS [Estimated shipping cost],
+    AVG(DATEDIFF(DAY, [Order_Date], [Ship_Date])) AS [Avg ship date]
+from  [KMS Sql Case Study1] 
+group by Order_Priority,Ship_Mode
+order by  Order_Priority,Ship_Mode desc
+```
 ### Analysis
-As displayed in the dashboard below, the product with the highest review is an high speed cable.		
-This means that this product is of best quality and gives users best satisfaction, however, the product might not necessarily be the product with the highest revenue.		
-The reason for this could be attributed the following: 		
-1. **Premium price:** This is a situation where the price of the product is expensive, but of good 		
-quality and the product is making wave.		
-2. **New Product:** It could be the product is just new to the market, and only few people have 		
-access to the product.		
-3. **Product Niche:** This could also be that the product is specifically for some set of people such		
-that it can not be commonly bought by all and sundry.
+from the analysis the following were observed.
 
-Additionally, from the dashboard below, the product category with the highest review is **Electronics**		
-which shows that the product of Amazons that are Electronic are of standard quality and they meet users demand.		
-Although, this doesn’t translate to the fact that, this products are more purchased or generates the highest revenue for  		
-Amazons as reviews doesn’t necessarily means commitment to buy by customers. 
-However, I will advise based on this information that they focus more on this product category as it will both generate revenue and integrity of product being bought.
+- KMS did not appropriately spend shipping costs based on the order of  priority. They overused delivery trucks, which are best for bulk or non-urgent orders and underused express air, which is meant for urgent deliveries. This shows a misalignment between shipping cost,speed and order priority leading to inefficient spending and wasted cost.
 
-Lastly, from the dashboard, it is seen that the product category with the lowest revenue is Toys & Games. this are seasonal productss and are not in demand by users.
-Hence, I will advise that Amazon put less	focus on this product as it doesn’t drive the market or bring any potential	value.	
+- To boost sales from the bottom 10 customers,
+  i. The company should focus on strengthening relationships through customized promotions, puchasing behaviours.
+  ii. Reaching out directly through calls or emails to their customers to understand their past experience.
+  iii. Give discounts on their most viewed or previously purchased products, Upsell and Cross-sell Offers,
+  iv. Offer faster delivery, better after-sales support, or dedicated account managers for small businesses
+  v. Organise a survey to understand the needs of the customers, which would make them come again and why they havent been coming frequently
 
-![Screenshot 2025-07-02 173749](https://github.com/user-attachments/assets/420924cd-a037-472f-9e01-970971fe73b2)
-
-[Amazon Case Study Project 1.xlsx](https://github.com/user-attachments/files/21022299/Amazon.Case.Study.Project.1.xlsx)
-
-
-
-
+Find below the back up file link for the sql query.
