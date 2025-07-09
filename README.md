@@ -4,7 +4,7 @@ Analysed datasets to give key insight and recommendations
 # PROJECT TOPIC: Kultra Mega Store Inventory
 
 ## Project Overview
-This is my project work after my 3 month training as a DSA student in Incubator hub. The project describes Kultra Mega Store Inventories, comprising of products, Customer names, Customer Segment, Total Sales, Shipping method, Orders and their date, returnd items, profits incurred, amongst others. The raw data file was 8,400 rows with row id and order id to identify and track each products.
+This is my project work after my 3 month training as a DSA student in Incubator hub. The project describes Kultra Mega Store Inventories, comprising of products, Customer names, Customer Segment, Total Sales, Shipping method, Orders and their date, returnd items, profits incurred, amongst others. The raw data file was 8,400 rows with row id and order which was used to identify and track each products and its relationship with other variables in the given data.
 
 ## Project Source
 The data for this project is a csv file which was supplied by Incubator Hub and is soleley for the training.  
